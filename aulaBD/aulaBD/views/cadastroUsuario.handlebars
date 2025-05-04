@@ -1,0 +1,12 @@
+<h3>{{mensagem}}</h3>
+<form action="/cadastrarUsuario" method="POST">
+    <p>Nome Completo: </p>
+    <input type="text" name="nome" value="{{usuario.nome}}">
+    <p>Usuário: </p>
+    <input type="text" name="username" value="{{usuario.username}}">
+    <p>Senha: </p>
+    <input type="password" name="senha">
+    <br>
+    <br>
+    <button type="submit">Cadastrar</button>
+</form>
