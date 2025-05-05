@@ -14,3 +14,8 @@ exports.criarUsuario = async function(novo_usuario){
     
     return "Produto cadastrado com sucesso!";
 }
+
+exports.excluirUsuario = async function(){
+    const respDesativa = await db.query("UPDATE usuario SET isativo = false WHERE username = $1");
+    return respDesativa;
+}

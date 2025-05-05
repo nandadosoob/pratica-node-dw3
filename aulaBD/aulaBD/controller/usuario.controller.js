@@ -5,31 +5,36 @@ exports.listarUsuarios = async function(){
     return usuarioDAO.listarUsuarios();
 }
 
+exports.excluirUsuario = async function(usuario) {
+    return await usuarioDAO.excluirUsuario(usuario.username);
+}
+
 exports.criarUsuario = async function(novo_usuario){
-    if(usuarioRN.validarUsername(novo_usuario.username) && usuarioRN.validarKeyTamanho(novo_usuario.senha) && usuarioRN.validarKeyMaiuscula(novo_usuario.senha) && usuarioRN.validarKeyNumero(novo_usuario.senha) && usuarioRN.validarKeyCaractereEspecial(novo_usuario.senha)){
-        await usuarioDAO.criarUsuario(novo_usuario);
-        return true;
+    const erro = []
+    if(!usuarioRN.validarUsername(novo_usuario.username)){
+        erro.push("username deve ter entre 5 e 10 caracteres!");
     }
     
-    // if(usuarioRN.validarKeyTamanho(novo_usuario.senha)){
-    //     await usuarioDAO.criarUsuario(novo_usuario);
-    //     return true;
-    // }
-
-    // if(usuarioRN.validarKeyMaiuscula(novo_usuario.senha)){
-    //     await usuarioDAO.criarUsuario(novo_usuario);
-    //     return true;
-    // }
-
-    // if(usuarioRN.validarKeyNumero(novo_usuario.senha)){
-    //     await usuarioDAO.criarUsuario(novo_usuario);
-    //     return true;
-    // }
+    if(!usuarioRN.validarKeyTamanho(novo_usuario.senha)){
+        erro.push("Senha deve ter no mínimo 8 caracteres.");
+    }
     
-    // if(usuarioRN.validarKeyCaractereEspecial(novo_usuario.senha)){
-    //     await usuarioDAO.criarUsuario(novo_usuario);
-    //     return true;
-    // }
-    return false;
+    if(!usuarioRN.validarKeyMaiuscula(novo_usuario.senha)){
+        erro.push("Senha deve conter pelo menos uma letra maiúscula.");
+    }
+    
+    if(!usuarioRN.validarKeyNumero(novo_usuario.senha)){
+        erro.push("Senha deve conter pelo menos um número.");
+    }
+    
+    if(!usuarioRN.validarKeyCaractereEspecial(novo_usuario.senha)){
+        erro.push("Senha deve conter pelo menos um caractere especial.");
+    }
 
+    if (erro.length > 0){
+        return { sucesso: false, erro };
+    }
+    
+    await usuarioDAO.criarUsuario(novo_usuario);
+    return { sucesso: true };
 }
