@@ -16,12 +16,13 @@ exports.criarUsuario = async function (novo_usuario) {
 }
 
 exports.verificaExistenciaUser = async function (username) {
-    const { userExiste } = await db.query('SELECT * FROM usuario WHERE username = $1 AND isativo = true',
+    const respUser= await db.query('SELECT * FROM usuario WHERE username = $1 AND isativo = true',
         [username]);
-    return userExiste.length > 0;
+        
+    return respUser.rows.length > 0;
 }
 
-exports.desativaUsuario = async function (username) {
-    const userExiste = await db.query("UPDATE usuario SET isativo = false WHERE username = $1 AND isativo = true")
-    return userExiste
+exports.excluirUsuario = async function (username) {
+    const userExiste = await db.query("UPDATE usuario SET isativo = false WHERE username = $1 AND isativo = true",[username])
+    return userExiste.rowCount > 0
 }

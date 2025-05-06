@@ -1,0 +1,17 @@
+<h1>Usuários Cadastrados</h1>
+{{#if resp.length}}
+<div>
+    {{#each resp}}
+    <div style="border: 1px solid black;">
+        <h2>{{nome}}</h2>
+        <p>{{username}}</p>
+        <form method="POST" action="/excluirUsuario">
+            <input type="hidden" name="username" value="{{username}}" />
+            <button type="submit">Excluir usuario</button>
+        </form>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<p>Não há usuários cadastrados.</p>
+{{/if}}

@@ -34,11 +34,20 @@ app.post('/cadastrarUsuario', function(req, res){
       res.render('cadastroUsuario', 
         {usuario: novo_usuario, mensagem: 
           resp.erro})})
-          // else if(resp == 3){
-          //   res.render('cadastroUsuario', {
-          //       usuario: novo_usuario,
-          //       mensagem: "Erro: username já está em uso"
-          //   });
+       
+});
+
+app.post('/excluirUsuario', function(req, res){
+  const username = req.body.username;
+  const resultado = usuarioController.excluirUsuario(username);
+
+  resultado.then(resp => {
+    if (resp.sucesso !== false) {
+      res.redirect('/listarUsuarios');
+    } else {
+      res.send("Erro ao excluir o usuário: " + resp.erro);
+    }
+  });
 });
 
 app.listen(port, () => {
