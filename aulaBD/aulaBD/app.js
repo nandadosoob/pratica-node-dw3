@@ -42,7 +42,7 @@ app.post('/excluirUsuario', function(req, res){
   const resultado = usuarioController.excluirUsuario(username);
 
   resultado.then(resp => {
-    if (resp.sucesso !== false) {
+    if (resp.sucesso) {
       res.redirect('/listarUsuarios');
     } else {
       res.send("Erro ao excluir o usuário: " + resp.erro);

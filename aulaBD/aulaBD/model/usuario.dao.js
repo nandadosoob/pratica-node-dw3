@@ -24,5 +24,5 @@ exports.verificaExistenciaUser = async function (username) {
 
 exports.excluirUsuario = async function (username) {
     const userExiste = await db.query("UPDATE usuario SET isativo = false WHERE username = $1 AND isativo = true",[username])
-    return userExiste.rowCount > 0
+    return userExiste.rowCount > 0;
 }

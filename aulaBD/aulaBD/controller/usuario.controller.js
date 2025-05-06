@@ -5,8 +5,8 @@ exports.listarUsuarios = async function () {
     return usuarioDAO.listarUsuarios();
 }
 
-exports.excluirUsuario = async function (usuario) {
-    const desativa = await usuarioDAO.excluirUsuario(usuario.username);
+exports.excluirUsuario = async function (username) {
+    const desativa = await usuarioDAO.excluirUsuario(username);
     if (desativa) {
         return { sucesso: true };
     } else {
