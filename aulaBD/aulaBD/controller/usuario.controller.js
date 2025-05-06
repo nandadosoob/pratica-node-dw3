@@ -9,6 +9,12 @@ exports.excluirUsuario = async function(usuario) {
     return await usuarioDAO.excluirUsuario(usuario.username);
 }
 
+exports.usuarioExiste = async function (novo_usuario) {
+    return await usuarioDAO.verificaExistenciaUser(novo_usuario.username);
+    return 3
+    
+}
+
 exports.criarUsuario = async function(novo_usuario){
     const erro = []
     if(!usuarioRN.validarUsername(novo_usuario.username)){

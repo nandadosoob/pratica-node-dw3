@@ -34,7 +34,11 @@ app.post('/cadastrarUsuario', function(req, res){
       res.render('cadastroUsuario', 
         {usuario: novo_usuario, mensagem: 
           resp.erro})})
-
+          // else if(resp == 3){
+          //   res.render('cadastroUsuario', {
+          //       usuario: novo_usuario,
+          //       mensagem: "Erro: username já está em uso"
+          //   });
 });
 
 app.listen(port, () => {
